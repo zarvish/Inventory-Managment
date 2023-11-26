@@ -5,13 +5,7 @@ const Inventory = require("../models/Inventory");
 exports.createData = async (req, res) => {
   try {
     console.log(req.body);
-    const {
-      name,
-      received_date,
-      dispatched_date,
-      received_quantity,
-      dispatched_quantity,
-    } = req.body;
+    const { name, received_date, received_quantity } = req.body;
 
     if (!name || !received_date || !received_quantity) {
       return res.status(400).json({ message: "Please fill all fields" });
@@ -20,7 +14,7 @@ exports.createData = async (req, res) => {
       name,
       date: {
         received_date: new Date(received_date),
-        dispatched_date: dispatched_date && new Date(dispatched_date),
+        dispatched_date: null,
       },
       quantity: {
         received_quantity,
