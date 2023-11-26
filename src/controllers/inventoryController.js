@@ -104,7 +104,10 @@ exports.updateData = async (req, res) => {
       }
 
       console.log(received_date, item.date.dispatched_date);
-      if (new Date(received_date) > item.date.dispatched_date) {
+      if (
+        item.date.dispatched_date &&
+        new Date(received_date) > item.date.dispatched_date
+      ) {
         return res.status(400).json({
           message: "you cannot fill date greater than dispatched date",
         });
